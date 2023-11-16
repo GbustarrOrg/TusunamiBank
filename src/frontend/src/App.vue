@@ -28,8 +28,7 @@ const newAccount = false; // Placeholder para implementar lo del localstorage de
 
 <template>
   <div>
-<!--     <index v-if="newAccount"></index>
-    <home v-else></home> -->
+    <index ></index>
     <router-view/>
   </div>
 </template>
