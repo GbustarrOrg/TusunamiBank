@@ -1,5 +1,14 @@
 <script setup>
     import Button from 'primevue/button';
+    import { useRouter } from 'vue-router';
+
+    const router = useRouter();
+    const cerrarSesion= ()=>{
+        router.push({ name: 'index' });
+        //outer.push({ name: 'index' });
+        console.log("Cerrando sesión...");
+    };
+
 </script>
 
 <template>
@@ -19,7 +28,7 @@
                 <div class="vertical-line"></div>
                 <p style="margin-right: 20px;">Hola, Sebastián Piñera</p>
                 <img src="../icons/choripan.jpg" class="rounded-icono">
-                <Button class="boton" label="Cerrar" :ripple="false"/>
+                <Button class="boton" label="Cerrar" :ripple="false" @click="cerrarSesion"/>
             </div>
       </div>
     </div>
