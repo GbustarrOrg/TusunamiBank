@@ -7,7 +7,7 @@
 
 <script setup>
 import index from './pages/index.vue';
-import home from './pages/home.vue';
+
 
 import { onMounted } from 'vue';
 import API from '@/API.js';
@@ -28,7 +28,6 @@ const newAccount = false; // Placeholder para implementar lo del localstorage de
 
 <template>
   <div>
-    <index ></index>
     <router-view/>
   </div>
 </template>
