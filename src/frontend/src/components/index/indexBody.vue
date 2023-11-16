@@ -5,7 +5,7 @@ import indexRegistro from './indexRegistro.vue';
 
 <template>
     <div>
-        <h1>Aqui va el contenido del landing page hago un cambio</h1>
+        <h1>Aqui va el contenido del landing page hago un cambiosdffsdf</h1>
         <indexRegistro></indexRegistro>
     </div>
 
