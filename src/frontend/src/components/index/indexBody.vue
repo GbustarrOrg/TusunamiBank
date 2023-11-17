@@ -1,33 +1,41 @@
 <script setup>
-const registro = async () => {
-  console.log("Yendo al registro");
-};
+
+/* const registro = async () => {
+  console.log('Yendo al registro')
+}
 const iniciarSesion = async () => {
-  console.log("Yendo al inicio de sesión");
-};
+  console.log('Yendo al inicio de sesión')
+} */
 </script>
 
 <template>
-  <v-app style=" height: auto;">
-    <v-toolbar class="white">
-      <img src="../icons/logo.png" alt="tusunami.png" style="height: 50px; width: 68px;">
-      <div style="font-weight:bold; font-size:28px">Banco Tusunami</div>
+  <v-app style="height: auto">
+    <v-toolbar class="black">
+      <img src="../icons/logo.png" alt="tusunami.png" style="height: 50px; width: 68px" />
+      <div style="font-weight: bold; font-size: 28px">Banco Tusunami</div>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn flat @click="registro">Registrarse</v-btn>
-        <v-btn flat @click="iniciarSesion">Iniciar Sesión</v-btn>
+        <v-btn class="registro" variant="tonal" to="/registro" color="black">Registrarse</v-btn>
+        <v-btn class="iniciarSesion" @click="login" variant="tonal" to="/iniciarSesion" color="black">Iniciar Sesión</v-btn>
+
       </v-toolbar-items>
     </v-toolbar>
     <v-content>
       <section>
-        <v-parallax src="https://cooperativa.cl/noticias/site/artic/20190829/imag/foto_0000002920190829085935.jpg"
-          height="600" class="d-flex align-center" style="opacity: 80%;">
+        <v-parallax
+          src="https://www.watsaysurfschool.com/wp-content/uploads/2021/01/como-se-forman-las-olas-1260x630.jpg"
+          height="600"
+          class="d-flex align-center"
+        >
           <v-container class="d-flex justify-center">
-            <div style="text-align:center; color:white">
-              <h1 class="white--text mb-2 display-1 font-weight-bold" style="font-size: 48px">El mejor Banco del Pais</h1>
-              <div class="white--text subheading mb-3 font-weight-bold" style="font-size: 20px">Danos tu dinero, tu confia
+            <div style="text-align: center; color: white">
+              <h1 class="white--text mb-2 display-1 font-weight-bold" style="font-size: 48px">
+                El mejor Banco del Mundo
+              </h1>
+              <div class="white--text subheading mb-3 font-weight-bold" style="font-size: 20px">
+                Danos tu dinero y tus contraseñas, tu confia
               </div>
-              <v-btn v-btn flat @click="registro">Unirse</v-btn>
+              <v-btn class="registro" variant="tonal" to="/registro" color="white ">Unirse</v-btn>
             </div>
           </v-container>
         </v-parallax>
@@ -36,11 +44,9 @@ const iniciarSesion = async () => {
       <section class="my-5">
         <div>
           <div>
-            <div style="text-align:center">
-              <h2>The best way to share your amazing stuff</h2>
-              <span class="subheading">
-                No more restrictions, no more limitssss
-              </span>
+            <div style="text-align: center">
+              <h2>¿Ya tienes cuenta?</h2>
+              <span class="subheading"> SUBE A REGISTRARTE </span>
             </div>
           </div>
           <div>
@@ -49,38 +55,60 @@ const iniciarSesion = async () => {
                 <v-col>
                   <v-card class="elevation-0 transparent">
                     <v-card-title primary-title class="layout justify-center">
-                      <div style="text-align:center">Reach the world</div>
+                      <div style="text-align: center">Seguridad y Protección</div>
                     </v-card-title>
                     <v-card-text>
-                      Show your stuff to the whole community of Endorfine not only to your mum or your friends. We love
-                      making good content viral. In this moment Endorfine is used by artists who are not famous but that
-                      want to share their works to the world. Unfortunately with other social networks this is hard, slow
-                      and sometime expensive.
+                      Tu seguridad es nuestra principal preocupación. Utilizamos las tecnologías 
+                      más avanzadas para proteger tu información financiera y personal. Nuestros 
+                      sistemas de seguridad están diseñados para garantizar que tus transacciones 
+                      sean seguras y tus datos estén protegidos en todo momento. Puedes confiar en 
+                      nuestro gran general Piñera
                     </v-card-text>
+                    <v-parallax
+                    src="https://media.biobiochile.cl/wp-content/uploads/2018/06/bajos-de-mena-puente-alto-750x400.jpg"
+                    height="600"
+                    class="d-flex align-center"
+                    >
+                  </v-parallax>
                   </v-card>
                 </v-col>
                 <v-col>
                   <v-card class="elevation-0 transparent">
                     <v-card-title primary-title class="layout justify-center">
-                      <div div style="text-align:center">Fast feedback</div>
+                      <div div style="text-align: center">Facilidad de Uso</div>
                     </v-card-title>
                     <v-card-text>
-                      Time is important, we don't want you to waste it. Here you can get a massive feedback from real
-                      users in minutes. And if your stuff is appreciated you won't only get positive feedback but also
-                      lovely and sincere fans.
+                      Simplificamos la banca para ti. Nuestra plataforma en línea y nuestra aplicación 
+                      móvil ofrecen una interfaz intuitiva y fácil de usar, permitiéndote acceder a tus 
+                      cuentas, realizar transferencias y gestionar tus finanzas con facilidad. 
+                      Ahorra tiempo y energía con nuestras soluciones bancarias convenientes.
                     </v-card-text>
+                    <v-parallax
+                    src="https://medelhi.files.wordpress.com/2010/01/4977g_pinera.jpg"
+                    height="600"
+                    class="d-flex align-center"
+                    >
+                  </v-parallax>
                   </v-card>
                 </v-col>
                 <v-col>
                   <v-card class="elevation-0 transparent">
                     <v-card-title primary-title class="layout justify-center">
-                      <div div style="text-align:center">Create new connections</div>
+                      <div div style="text-align: center">Innovación Continua</div>
                     </v-card-title>
                     <v-card-text>
-                      Imagine if you can directly speak with the world's population. Don't you think it would be easier to
-                      find nice people to interact with? Endorfine is both local and global and help you to connect
-                      without limitations with people from your city, your state and your universe!
+                      Nos esforzamos por mantenerte a la vanguardia de la innovación financiera. 
+                      Constantemente actualizamos nuestras plataformas y servicios para ofrecerte lo 
+                      último en tecnología bancaria. Al unirte a nosotros, te beneficiarás de las últimas 
+                      tendencias y herramientas que hacen que gestionar tus finanzas sea más eficiente y 
+                      emocionante.
                     </v-card-text>
+                    <v-parallax
+                    src="https://static.theclinic.cl/media/2019/07/pi%C3%B1era-lentes-a1.jpg"
+                    height="600"
+                    class="d-flex align-center"
+                    >
+                  </v-parallax>
                   </v-card>
                 </v-col>
               </v-layout>
@@ -88,6 +116,7 @@ const iniciarSesion = async () => {
           </div>
         </div>
       </section>
+
 
 
 
@@ -201,7 +230,6 @@ const iniciarSesion = async () => {
     </v-content>
   </v-app>
 </template>
-
 
 <style scoped>
 .carousel-image {
