@@ -23,7 +23,7 @@ const iniciarSesion = async () => {
             <v-parallax src="https://medlineplus.gov/images/Tsunamis_share.jpg" height="600" class="d-flex align-center">
                 <v-container class="d-flex justify-center">
                     <div style="text-align:center; color:white">
-                    <h1 class="white--text mb-2 display-1 font-weight-bold" style="font-size: 48px">El mejor Banco del Pais.</h1>
+                    <h1 class="white--text mb-2 display-1 font-weight-bold" style="font-size: 48px">El mejor Banco del Pais</h1>
                     <div class="white--text subheading mb-3 font-weight-bold" style="font-size: 20px">Danos tu dinero, tu confia</div>
                     <v-btn v-btn flat @click="registro">Unirse</v-btn>
                     </div>
