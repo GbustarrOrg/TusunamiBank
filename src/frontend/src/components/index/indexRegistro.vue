@@ -38,14 +38,15 @@
           </div>
           <div class="input-container">
             <label style="color:#103ed4" for="password">Contraseña:</label>
-            <input type="password" id="password" :maxlength="50" :counter="50" v-model="password" required>
+            <input @input="validarPassword" type="password" id="password" :maxlength="50" :counter="50" v-model="password" required>
+            <p v-if="!contraValida" style="color: red;">La contraseña ingresada no es válida.</p>
           </div>
   
           <v-select style="color: #103ed4;" v-model="sucursal" label="Sucursal" :items="[1, 2, 3]" variant="outlined"
             required></v-select>
   
           <v-btn block :color="esValido ? '#ee451b' : 'grey'" type="submit" @click="verificarYCrearUsuario"
-            :disabled="!(completeName.length > 0 && password.length > 0 && esRutValido)">Registrar</v-btn>
+            :disabled="!(completeName.length > 0 && contraValida && esRutValido)">Registrar</v-btn>
           <div>
             <h3 style="color:#103ed4">¿Ya tienes cuenta?
               <router-link to="login">Iniciar Sesión</router-link>
@@ -71,6 +72,7 @@
         sucursal: '',
         esValido: false,
         esRutValido: true,
+        contraValida:true
       };
     },
   
@@ -130,12 +132,32 @@
       },
   
       validarRut() {
-        const rutSinPuntos = this.rut.replace(/\./g, '');
+        const rutSinPuntos = this.rut.replace(/\./g, '').replace(/\s/g, '');
         const [rutNumeros, rutDV] = rutSinPuntos.split('-');
-        this.esRutValido = true//this.dv(rutNumeros) === rutDV;
-        return true;
+        if (!rutNumeros || !rutDV || rutNumeros.length !== 8 || rutDV.length !== 1 
+        || !/^\d*$/.test(rutNumeros) || 
+        (!/^\d*$/.test(rutDV) && rutDV.toLowerCase() !== 'k')) {
+          this.esRutValido = false;
+          return false;
+        }
+        else{
+          this.esRutValido = true;
+          return true;
+        }
       },
-  
+      
+      validarPassword(){
+        const password = this.password
+        if (!/^[^\d]*\d+[^\d]*$/.test(password) || password.length<6){
+          this.contraValida = false;
+          return false;
+        }
+        else{
+          this.contraValida = true;
+          return true;
+        }
+      },
+
       dv(T) {
         let M = 0, S = 1;
         for (; T; T = Math.floor(T / 10))
