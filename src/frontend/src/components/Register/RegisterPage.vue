@@ -212,6 +212,7 @@ h2 {
 label {
   display: block;
   font-weight: bold;
+
 }
 
 input[type="text"],
@@ -244,3 +245,4 @@ body {
   background-color: #c7c7c7;
 }
 </style>
+

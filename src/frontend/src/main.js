@@ -37,7 +37,6 @@ const firebaseConfig = {
 const firebase = initializeApp(firebaseConfig);
 console.log(firebase)
 
-
 const vuetify = createVuetify({
     components,
     directives,

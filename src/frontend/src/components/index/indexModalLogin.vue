@@ -1,8 +1,6 @@
 <!--Contenido del formulario de login-->
 <!-- Debe contener la logica para redireccionar hacia home.vue si existe un login correcto-->
 
-
-
 <template>
   <div >
     <div class="contenedor">
