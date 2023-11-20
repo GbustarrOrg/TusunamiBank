@@ -163,7 +163,7 @@ export default {
 };
 </script>
 
-<style setup>
+<style scoped>
 h1 {
   font-size: 50px;
   display: flex;
