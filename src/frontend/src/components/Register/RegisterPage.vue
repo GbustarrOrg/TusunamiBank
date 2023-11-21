@@ -32,7 +32,7 @@
           <input @input="validarEmail" type="text" id="correo electronico" :maxlength="50" :counter="50" v-model="email"
             required>
           <p v-if="esValido"></p>
-          <p v-else style="color: black">El correo electrónico debe contener al menos un "@".</p>
+          <p v-else style="color: black">El correo electrónico debe contener al menos un "@" y terminar en .com .cl .</p>
         </div>
         <div class="input-container">
           <label style="color:#103ed4" for="password">Contraseña:</label>
@@ -123,9 +123,16 @@ export default {
     },
 
     validarEmail() {
-      this.esValido = this.email.includes('@');
-      return this.esValido;
-    },
+  // Expresión regular para verificar la extensión
+  const expresionRegular = /\.(com|cl|net)$/;
+
+  // Convertir el correo a minúsculas antes de la validación
+  const correoEnMinusculas = this.email.toLowerCase();
+
+  // Verificar si el correo electrónico contiene '@' y si la extensión es válida
+  this.esValido = correoEnMinusculas.includes('@') && expresionRegular.test(correoEnMinusculas);
+  return this.esValido;
+},
 
     validarRut() {
       const rutSinPuntos = this.rut.replace(/\./g, '');

@@ -1,21 +1,23 @@
 <!-- Parte superior del index (landing page) aqui podrian colocar iconos o botones de navegación-->
 <!-- Desde aqui se accede al login mediante el componente indexModalLogin-->
 <script setup>
-import indexModalLogin from './indexModalLogin.vue';
-import Dialog from 'primevue/dialog';
-import Button from 'primevue/button';
-import { ref } from "vue";
-
-const visible = ref(false);
-
+    import Button from 'primevue/button';
 </script>
 
 <template>
-    <div class="card flex justify-content-center">
-        <Button label="Login" icon="pi pi-external-link" @click="visible = true" />
-
-        <Dialog v-model:visible="visible" modal :style="{ width: '100rem', height: '100rem' }">
-            <indexModalLogin></indexModalLogin>
-        </Dialog>
+    <div class="flex justify-content-center">
+        <button  class="p-button-rounded p-button-secondary button" @click="$router.push('/iniciarSesion')">Iniciar Sesión</button>
     </div>
 </template>
+
+<style scoped>
+    .button {
+        margin-left: 10px;
+        display: block;
+        background-color: blue;
+        color: white;
+    }
+    .button:hover {
+        background-color: #0f45ab;
+    }
+</style>

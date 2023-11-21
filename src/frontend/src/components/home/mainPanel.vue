@@ -1,22 +1,14 @@
 <script setup>
+    import { defineProps , watch ,defineEmits} from 'vue';
     import VirtualScroller from 'primevue/virtualscroller';
     import Card from 'primevue/card';
-    import Button from 'primevue/button';
     //lista con "transacciones, estas se mostraran en el scroll, deberian ser transacciones desde la bd"
-    const listaTransacciones = [
-    { fecha: '1/09/2019', tipo: 'Deposito', sucursal: 'Islas Caimán', monto: '5.000.000' },
-    { fecha: '2/04/2020', tipo: 'Retiro', sucursal: 'Talca', monto: '2.000.000.000' },
-    { fecha: '3/09/2021', tipo: 'Deposito', sucursal: 'Santiago', monto: '500.000' },
-    { fecha: '4/09/2022', tipo: 'Retiro', sucursal: 'Islas Caimán', monto: '2.000.000' },
     
-    ];
-    //informacion de la cuenta actual , se actualizan en la card
-    const infoCuenta={
-        tipo:'Corriente',
-        numCuenta:'000000001',
-        saldo:'Infinito',
-        sucursal:'Curicó'
-    };
+    const props = defineProps({
+        infoCuenta: Object,
+        listaTransacciones: Array,
+    })
+    
 </script>
 
 <style>
@@ -29,12 +21,16 @@
     }
 
     .botonDeposito{
+        margin-top: 10px;
+        margin-bottom: 20px;
         margin-right: 40px;
         background-color: #ffff; 
         color: #d52b1e
     }
 
     .botonRetiro{
+        margin-top: 10px;
+        margin-bottom: 20px;
         margin-right: 40px;
         color: #ffff; 
         background-color: #d52b1e
@@ -84,6 +80,7 @@
     }
 
     .scrollTransaccion{
+        margin-top: 20px;
         display: flex;
         height: 45vh;
         width: 100%;
@@ -108,34 +105,39 @@
 
 <template>
     <div class="divPrincipal">
-        <row>
+        <div>
         <Card class="cardPrincipal">
             <template #title > 
-                <div style="text-align: center; font-weight: bold; color:black;">Cuenta {{ infoCuenta.tipo }} </div>
+                <div style="text-align: center; font-weight: bold; color:black; margin-top: 10px; margin-bottom:10px;">Cuenta {{ props.infoCuenta.tipo }} </div>
             </template>
           <template #content>
-            <column style="height:40%">
+            <div style="height:40%">
             <Card class="cardCuenta">
               <template #content>
-                Cuenta: #{{ infoCuenta.numCuenta }} <br>
-                Saldo: {{infoCuenta.saldo}} <br>
-                Sucursal: {{infoCuenta.sucursal}}<br>
-                <br>
+                <div style="margin-top: 20px;">
+                Cuenta: #{{ props.infoCuenta.numCuenta }} <br>
+                Saldo: {{props.infoCuenta.saldo}} <br>
+                Sucursal: {{props.infoCuenta.sucursal}}<br>
+                </div>
                 <div>
-                    <row>
-                        <Button label="Realizar Depósito" text raised  class="botonDeposito"/>
-                    </row>
-                    <row>
-                        <Button label="Realizar Retiro" text raised class="botonRetiro"/>
-                    </row>
+                    <div>
+                        <v-btn class="botonDeposito">
+                            Realizar Deposito
+                        </v-btn>
+                    </div>
+                    <div>
+                        <v-btn class="botonRetiro">
+                            Realizar Retiro
+                        </v-btn>
+                    </div>
                 </div>
               </template>
             </Card>
-            </column>
-            <column>
+        </div>
+            <div>
                 <Card class="cardScroll" style="height: 60%;">
                 <template #title><div style="text-align: center; font-weight: bold; color:black;">Últimas Transacciones</div> </template>
-                <template #content>
+                <template #content >
                     <VirtualScroller :items="listaTransacciones" :itemSize="100" class="scrollTransaccion">
                     <template v-slot:item="{ item }">
                         <Card class="cardTransaccion">
@@ -153,12 +155,12 @@
                     </VirtualScroller>
                 </template>
                 </Card>
-            </column>
+            </div>
           </template>
         </Card>
-        </row>
-        <row class="fondoDerecha">
-        </row>
+        </div>
+        <div class="fondoDerecha">
+        </div>
     </div>
   </template>
   

@@ -23,7 +23,7 @@ const cerrarSesion = async () => {
             </div>
             <div class="spacer"></div>
             <div class="boton-container">
-                <Button class="boton" label="Sucursales" :ripple="false" />
+                <button class="boton" label="Sucursales" :ripple="false" />
                 <div class="vertical-line"></div>
                 <p style="margin-right: 20px;">Hola, Sebastián Piñera</p>
                 <img src="../icons/choripan.jpg" class="rounded-icono">

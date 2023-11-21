@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-const url = "https://tsunamibank-backend.onrender.com/api/"
+const url ="https://tsunamibank-backend.onrender.com/api/"
+//const url = "http://localhost:8080/api/"
+
 
 export default class API {
 
@@ -36,4 +38,39 @@ export default class API {
         }
     }
 
+
+    static async verificarUsuarioPorSucursal(sucursal, rut) {
+        try {
+            const res = await axios.get(`${url}verificarUsuarioPorSucursal/${sucursal}/${rut}`);
+            return res.data;
+        } catch (error) {
+            return error.response.data;
+        }
+    }
+
+    static async confirmarUsuarioByRut(rut) {
+        try {
+            const res = await axios.get(`${url}confirmarUsuarioByRut/${rut}`);
+            return res.data;
+        } catch (error) {
+            return error.response.data;
+        }
+    }
+
+    static async getNumeroCuentaVista() {
+        try {
+            const res = await axios.get(url + "getNumeroCuentaVista")
+            return res.data
+        } catch (error) {
+            return error.response.data
+        }
+    }
+    static async addCuentaVista(data) {
+        try {
+            const res = await axios.post(url + "addCuentaVista", data)
+            return res.data
+        } catch (error) {
+            return error.response.data
+        }
+    }
 }

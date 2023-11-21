@@ -6,22 +6,20 @@
 -->
 
 <script setup>
-import indexHeader from '../components/index/indexHeader.vue'
 import indexBody from '../components/index/indexBody.vue'
 
 
 </script>
 <template>
-  <v-app>
-    <v-app-bar>
-    <indexHeader></indexHeader>
-    </v-app-bar>
-  <v-main>
-    <indexBody></indexBody> <!-- contenido del landing page-->
-  </v-main>
-</v-app>
+    <indexBody class="main"></indexBody> <!-- contenido del landing page-->
 </template>
 
 <style scoped>
-
+.main{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+}
 </style>
