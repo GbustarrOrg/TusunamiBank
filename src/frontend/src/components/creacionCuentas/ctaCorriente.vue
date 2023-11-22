@@ -37,7 +37,7 @@
   </div>
   <footer class="footer">
     <div class="brand">
-      <p>Marca Registrada &reg;</p>
+      <p>Marca Registrada. &reg;</p>
     </div>
   </footer>
 
