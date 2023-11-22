@@ -1,5 +1,5 @@
 <script setup>
-    import { defineProps , watch ,defineEmits} from 'vue';
+    import { defineProps} from 'vue';
     import VirtualScroller from 'primevue/virtualscroller';
     import Card from 'primevue/card';
     //lista con "transacciones, estas se mostraran en el scroll, deberian ser transacciones desde la bd"
