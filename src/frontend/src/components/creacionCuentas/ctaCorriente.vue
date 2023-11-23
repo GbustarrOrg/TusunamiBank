@@ -1,6 +1,6 @@
 <template>
   <div class="pagina">
-    
+    <!-- cambio para el commit -->
     <v-app>
       <v-container class="container">
         <v-row>
