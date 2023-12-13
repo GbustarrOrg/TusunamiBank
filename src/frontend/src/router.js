@@ -16,6 +16,7 @@ const routes = [
     name: 'registro',
     component: () => import('./pages/registro.vue'),
   },
+
   {
     path: '/creacioncuentas',
     name: 'creacioncuentas',
@@ -33,6 +34,18 @@ const routes = [
     name: 'iniciarSesion',
     component: () => import('./pages/iniciarSesion.vue'),
   }
+
+  {
+    path: '/logintest',
+    name: 'logintest',
+    component: () => import('./pages/logintest.vue'),
+  },
+
+  {
+    path: '/tipoDeCuenta',
+    name: 'tipoDeCuenta',
+    component: () => import('./pages/tipoDeCuenta.vue'),
+  },
 ];
 
 const router = createRouter({
