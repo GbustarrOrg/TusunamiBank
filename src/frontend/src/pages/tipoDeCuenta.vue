@@ -12,7 +12,9 @@
 						<v-card-title class="titulo">Cuenta Básica</v-card-title>
 						<v-card-item class="imagen"><img src="/planbasico.png" alt="Logo"
 								style="width: 100%;height: 50%;"></v-card-item>
-						<v-btn block rounded="lg" style="background-color:#FF0000 ;">Contratar</v-btn>
+						<router-link to="/cuentaAhorro">
+							<v-btn block rounded="lg" style="background-color:#FF0000 ;">Contratar</v-btn>
+						</router-link>
 					</v-card>
 				</v-col>
 
