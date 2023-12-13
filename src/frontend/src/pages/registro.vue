@@ -189,7 +189,7 @@ export default {
 			// Verificar rut y correo
 			if (this.validarRut() && this.validarEmail()) {
 				await this.crearUsuario();
-				this.$router.push("/tipoDeCuenta");
+				
 			} else {
 				Swal.fire({
 					icon: 'error',
@@ -221,7 +221,7 @@ export default {
 							title: 'Registro Exitoso',
 						})
 						console.log("Registro exitoso")
-						this.$router.push({ path: '/logintest' })
+						this.$router.push({ path: '/tipoDeCuenta' })
 
 					} else {
 
