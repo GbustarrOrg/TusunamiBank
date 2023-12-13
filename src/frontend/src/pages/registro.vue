@@ -9,6 +9,10 @@
 						<br>Tusunami
 					</div>
 					<div>
+						<h3 style="color:#103ed4">¿Ya tienes cuenta?
+							<router-link to="/iniciarSesion">Iniciar Sesión</router-link>
+							<br><br>
+						</h3>
 						<img src="/pinera.png" alt="Logo" style="width: 100%;height: 100%;margin-top: 20px;">
 					</div>
 				</v-col>
@@ -69,6 +73,101 @@
 <script>
 import API from '@/API.js';
 import Swal from 'sweetalert2';
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
+const completeName = ref('');
+const rut = ref('');
+const email = ref('');
+const password = ref('');
+const sucursal = ref('');
+const esValido = ref(false);
+const esRutValido = ref(true);
+const contraValida = ref(true);
+
+const verificarYCrearUsuario = async () => {
+  if (validarRut() && validarEmail()) {
+    await crearUsuario();
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error de Registro',
+      text: 'Rut o correo incorrecto',
+    });
+    console.log("Error de registro");
+  }
+};
+
+const crearUsuario = async () => {
+  const nombre = completeName.value.split(' ');
+  const numeroDeUsuarios = await API.getNumeroUsuarios();
+  const response = await API.addUsuario({
+    "nombres": nombre[0] + " " + nombre[1],
+    "apellidoPaterno": nombre[2],
+    "apellidoMaterno": nombre[3],
+    "email": email.value.toLowerCase(),
+    "rut": rut.value,
+    "password": password.value,
+    "sucursal": sucursal.value,
+    "idUsuario": numeroDeUsuarios + 1
+  });
+
+  if (response.Respuesta == true) {
+    Swal.fire({
+      icon: 'success',
+      title: 'Registro Exitoso',
+    });
+    console.log("Registro exitoso");
+  
+    router.push({ path: '/iniciarSesion' });
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error de Registro',
+      text: 'Cuenta ya registrada',
+    });
+    console.log("Error de registro");
+  }
+};
+
+const validarEmail = () => {
+  const expresionRegular = /\.(com|cl|net)$/;
+  const correoEnMinusculas = email.value.toLowerCase();
+  esValido.value = correoEnMinusculas.includes('@') && expresionRegular.test(correoEnMinusculas);
+  return esValido.value;
+};
+
+const validarRut = () => {
+  const rutSinPuntos = rut.value.replace(/\./g, '').replace(/\s/g, '');
+  const [rutNumeros, rutDV] = rutSinPuntos.split('-');
+  if (!rutNumeros || !rutDV || rutNumeros.length !== 8 || rutDV.length !== 1 || !/^\d*$/.test(rutNumeros) ||
+    (!/^\d*$/.test(rutDV) && rutDV.toLowerCase() !== 'k')) {
+    esRutValido.value = false;
+    return false;
+  } else {
+    esRutValido.value = true;
+    return true;
+  }
+};
+
+const validarPassword = () => {
+  const passwordValue = password.value;
+  if (!/^[^\d]*\d+[^\d]*$/.test(passwordValue) || passwordValue.length < 6) {
+    contraValida.value = false;
+    return false;
+  } else {
+    contraValida.value = true;
+    return true;
+  }
+};
+
+const dv = (T) => {
+  let M = 0, S = 1;
+  for (; T; T = Math.floor(T / 10))
+    S = (S + T % 10 * (9 - M++ % 6)) % 11;
+  return S ? String(S - 1) : 'K';
+};
+
 
 export default {
 	data() {

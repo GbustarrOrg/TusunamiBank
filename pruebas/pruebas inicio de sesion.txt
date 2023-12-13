@@ -6,27 +6,16 @@
 * El rut esta con formato erróneo: respuesta esperada: feedback de mensaje de alerta
 * El rut es falso: respuesta esperada: feedback de mensaje de alerta
 
-
-
-
 Pruebas contraseña:
 * La contraseña contiene 8 o más caracteres y menos de 16 caracteres, 1 o mas mayúsculas y 1 o más números: respuesta esperada: feedback de contraseña válida
 * La contraseña no contiene 8 o más caracteres y menos de 16 caracteres, no contiene mayúsculas y 1 o más números: feedback de contraseña inválida
 * La contraseña contiene 8 o más caracteres y menos de 16 caracteres, no contiene mayúsculas y 1 o más números: feedback de contraseña inválida
 * La contraseña contiene 8 o más caracteres y menos de 16 caracteres, 1 o mas mayúsculas y 0 números: respuesta esperada: feedback de contraseña inválida
 
-
-
-
 Pruebas rut y contraseña:
-
-
 * Utiliza un RUT y una contraseña válidos para verificar que el sistema permite el acceso correctamente: respuesta esperada: feedback de login válido
 * Ingresa un RUT válido pero una contraseña inválida: respuesta esperada: feedback de login invalido.
 * Intenta ingresar caracteres especiales en el campo del RUT y la contraseña para verificar la seguridad del sistema: respuesta esperada: feedback de caracteres inválidos.
-
-
-
 
 Pruebas inicio de sesión:
 * Se presiona el botón con las credenciales en blanco: respuesta esperada: feedback de mensaje de alerta
@@ -36,20 +25,73 @@ Pruebas inicio de sesión:
 * se presiona botón con credenciales puestas pero rut invalido: respuesta esperada: feedback de mensaje de alerta
 * se presiona botón con credenciales puestas pero contraseña invalido: respuesta esperada: feedback de mensaje de alerta
 
+Pruebas de Escenarios:
+    Iniciar sesion en la aplicacion
+        Paso | Accion | Resultado obtenido
+        1 | U: Ingresar rut y contraseña | Cumple
+            U: Presionar boton de inicio de sesion | Cumple
+        2 | S: Verificar que el rut tenga el formato correcto (xxxxxxxx-x) | No Cumple
+            S: Verificar que el rut este almacenado en la base de datos | Cumple
+        3 | S: Verificar que la contraseña tenga el formato correcto | Cumple
+            S: Verificar que la contraseña este almacenada en la base de datos
+        4 | S: Verificar que la contraseña corresponda al rut | Cumple
+        5 | S: Iniciar sesion | Cumple
+            S: Mostrar mensaje de exito | No Cumple
 
+        Paso | Variantes
+        Accion | Resultado obtenido
+        2a: El rut no tiene el formato correcto
+            S: Mostrar mensaje de alerta | Cumple
+        2c: El rut no esta almacenado en la base de datos
+            S: Mostrar mensaje de alerta | No Cumple
+        3a: La contraseña no tiene el formato correcto
+            S: Mostrar mensaje de alerta | Cumple
+        4a: La contraseña no corresponde al rut 
+            S: Mostrar mensaje de alerta | No Cumple
+        
+        Comentarios: 
+        - El mensaje que se reutiliza es ambiguo para los diferentes casos de error
+        - El mensaje de exito no se muestra
+        - El largo del rut no esta validado
+        - El inicio de sesion no esta centrado en la pagina
+        - Los campos de entrada no llegan al final de la tarjeta
+        - La imagen de Piñera no esta centrada
+        - Deberia decir "Iniciar Sesion" en vez de "Inicia Sesion"
 
+    Registrar usuario
+        Paso | Accion | Resultado obtenido
+        1 | U: Ingresar rut, contraseña, nombre completo, correo electronico y sucursal | Cumple
+            U: Presionar boton Registrar | Cumple
+        2 | S: Verificar que el rut tenga el formato correcto (xxxxxxxx-x) | No Cumple
+            S: Verificar que el rut no este almacenado en la base de datos | Cumple
+        3 | S: Verificar que la contraseña tenga el formato correcto | Cumple
+        4 | S: Verificar que el correo electronico tenga el formato correcto | No Cumple
+            S: Verificar que el correo electronico no este almacenado en la base de datos | Cumple
+        5 | S: Verificar que se haya selecionado una sucursal | No Cumple
+        6 | S: Registrar usuario | Cumple
+            S: Mostrar mensaje de exito | Cumple
 
+        Paso | Variantes
+        Accion | Resultado obtenido
+        2a: El rut no tiene el formato correcto
+            S: Mostrar mensaje de alerta | Cumple
+        2b: El rut esta almacenado en la base de datos
+            S: Mostrar mensaje de alerta | Cumple
+        3a: La contraseña no tiene el formato correcto
+            S: Mostrar mensaje de alerta | Cumple
+        4a: El correo electronico no tiene el formato correcto
+            S: Mostrar mensaje de alerta | Cumple
+        4b: El correo electronico esta almacenado en la base de datos
+            S: Mostrar mensaje de alerta | Cumple
+        5a: No se ha seleccionado una sucursal
+            S: Mostrar mensaje de alerta | No Cumple
 
-
-
-
-Pruebas de botón de inicio de sesión con google:
-* al presionarlo redirecciona a gmail:  respuesta esperada: redireccionamiento
-* al presionarlo no redirecciona a gmail: respuesta esperada: no hay respuesta
-
-
-
-
-Pruebas de boton inicio de sesión con facebook:
-* al presionarlo redirecciona a facebook:  respuesta esperada: redireccionamiento
-* al presionarlo no redirecciona a facebook: respuesta esperada: no hay respuesta
+        Comentarios:
+        - No permite un rut que sea inferior a 10 millones
+        - Permite Correos: @gmail.com, @.com
+        - Se puede Registrar sin elegir sucursal
+        - La pagina esta mal centrada
+        - El titulo no se ve completo
+        - Los campos de entrada no llegan al final de la tarjeta
+        - Deberia decir "Crear Cuenta" en vez de "Crear cuenta"
+        - La imagen de Piñera se sale del contenedor

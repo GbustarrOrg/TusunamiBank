@@ -1,0 +1,2 @@
+El rut no es válido para terminaciones en k
+El resto es correcto

@@ -16,11 +16,10 @@ const iniciarSesion = async () => {
       <v-spacer></v-spacer>
       <v-toolbar-items>
         <v-btn class="registro" variant="tonal" to="/registro" color="black">Registrarse</v-btn>
-        <v-btn class="iniciarSesion" @click="login" variant="tonal" to="/iniciarSesion" color="black">Iniciar Sesión</v-btn>
+        <v-btn class="iniciarSesion" variant="tonal" to="/iniciarSesion" color="black">Iniciar Sesión</v-btn>
 
       </v-toolbar-items>
     </v-toolbar>
-    <v-content>
       <section>
         <v-parallax
           src="https://www.watsaysurfschool.com/wp-content/uploads/2021/01/como-se-forman-las-olas-1260x630.jpg"
@@ -40,7 +39,6 @@ const iniciarSesion = async () => {
           </v-container>
         </v-parallax>
       </section>
-
       <section class="my-5">
         <div>
           <div>
@@ -227,7 +225,6 @@ const iniciarSesion = async () => {
         </div>
       </v-footer>
 
-    </v-content>
   </v-app>
 </template>
 

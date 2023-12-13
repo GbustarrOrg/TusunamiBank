@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use('/api', require('./routes/usuario'));
-
+app.use('/api', require('./routes/cuentaVista'));
 
 // Middleware para Vue.js router modo history
 const history = require('connect-history-api-fallback');
