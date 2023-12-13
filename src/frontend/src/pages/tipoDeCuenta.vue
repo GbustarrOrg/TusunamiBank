@@ -9,10 +9,10 @@
 
 				<v-col cols="3" style="min-width: 33%;">
 					<v-card class="plan">
-						<v-card-title class="titulo">Cuenta Básica</v-card-title>
+						<v-card-title class="titulo">Cuenta Ahorro</v-card-title>
 						<v-card-item class="imagen"><img src="/planbasico.png" alt="Logo"
 								style="width: 100%;height: 50%;"></v-card-item>
-						<router-link to="/cuentaAhorro">
+						<router-link to="/ctaAhorro">
 							<v-btn block rounded="lg" style="background-color:#FF0000 ;">Contratar</v-btn>
 						</router-link>
 					</v-card>
@@ -20,19 +20,23 @@
 
 				<v-col cols="3" style="min-width: 33%;">
 					<v-card class="plan">
-						<v-card-title class="titulo">Cuenta Estándar</v-card-title>
+						<v-card-title class="titulo">Cuenta Corriente</v-card-title>
 						<v-card-item class="imagen"><img src="/plancomun.png" alt="Logo"
 								style="width: 100%;height: 50%;"></v-card-item>
-						<v-btn block rounded="lg" style="background-color:#964B00;">Contratar</v-btn>
+						<router-link to="/ctaCorriente">
+							<v-btn block rounded="lg" style="background-color:#964B00;">Contratar</v-btn>
+						</router-link>
 					</v-card>
 				</v-col>
 
 				<v-col cols="3" style="min-width: 33%;">
 					<v-card class="plan">
-						<v-card-title class="titulo">Cuenta Premium</v-card-title>
+						<v-card-title class="titulo">Cuenta Vista</v-card-title>
 						<v-card-item class="imagen"><img src="/planpremium.png" alt="Logo"
 								style="width: 100%;height: 50%;"></v-card-item>
-						<v-btn block rounded="lg" style="background-color:#0000FF;">Contratar</v-btn>
+						<router-link to="/ctaVista">
+							<v-btn block rounded="lg" style="background-color:#0000FF;">Contratar</v-btn>
+						</router-link>
 					</v-card>
 				</v-col>
 

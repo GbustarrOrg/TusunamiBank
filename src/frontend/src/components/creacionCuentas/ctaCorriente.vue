@@ -33,15 +33,13 @@
           </v-col>
         </v-row>
       </v-container>
+      <footer class="footer">
+        <div class="brand">
+          <p>Marca Registrada &reg;</p>
+        </div>
+      </footer>
     </v-app>
   </div>
-  <footer class="footer">
-    <div class="brand">
-      <p>Marca Registrada &reg;</p>
-    </div>
-  </footer>
-
-
 </template>
 
 <script>

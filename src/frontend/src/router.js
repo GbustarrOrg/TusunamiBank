@@ -18,15 +18,21 @@ const routes = [
   },
 
   {
-    path: '/creacioncuentas',
-    name: 'creacioncuentas',
-    component: () => import('./pages/creacioncuentas.vue'),
-  },
-
-  {
     path: '/ctaVista',
     name: 'ctaVista',
     component: () => import('./components/creacionCuentas/ctaVista.vue'),
+  },
+
+  {
+    path: '/ctaCorriente',
+    name: 'ctaCorriente',
+    component: () => import('./components/creacionCuentas/ctaCorriente.vue'),
+  },
+
+  {
+    path: '/ctaAhorro',
+    name: 'ctaAhorro',
+    component: () => import('./components/creacionCuentas/ctaAhorro.vue'),
   },
 
   {
@@ -36,22 +42,11 @@ const routes = [
   },
 
   {
-    path: '/logintest',
-    name: 'logintest',
-    component: () => import('./pages/logintest.vue'),
-  },
-
-  {
     path: '/tipoDeCuenta',
     name: 'tipoDeCuenta',
     component: () => import('./pages/tipoDeCuenta.vue'),
   },
 
-  {
-    path: '/cuentaAhorro',
-    name: 'cuentaAhorro',
-    component: () => import('./pages/cuentadeahorro.vue'),
-  }
 ];
 
 const router = createRouter({

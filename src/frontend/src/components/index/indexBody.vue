@@ -22,7 +22,7 @@ const iniciarSesion = async () => {
     </v-toolbar>
       <section>
         <v-parallax
-          src="https://www.watsaysurfschool.com/wp-content/uploads/2021/01/como-se-forman-las-olas-1260x630.jpg"
+          src="https://medicoplus.com/_next/image?url=https%3A%2F%2Fplustatic.com%2F2558%2Fconversions%2Ftipos-olas-large.jpg&w=1024&q=75"
           height="600"
           class="d-flex align-center"
         >
