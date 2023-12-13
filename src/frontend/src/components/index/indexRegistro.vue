@@ -1,20 +1,18 @@
+<!-- Componente designado para contener el formulario de registro del mockup-->
+<!-- Debe contener la logica necesaria para redireccionar hacia home si el registro fue exitoso-->
 <template>
   <div class="registro-container">
     <div class="image-container">
-      <h1 style="color: #ee451b">Bancos<br>Tusunami</h1>
-      <img
-        src="https://trello.com/1/cards/654d83f9682db5e91c4b4d00/attachments/654ff6e5f6f7c785ecf36ba5/previews/654ff6e6f6f7c785ecf36bbd/download/pngwing.com.png"
-        alt="Imagen de fondo" width="510" height="510" />
+      <div class="fila" style="color: red; text-align: center; font-weight:800; font-size: 40px ;">Bancos <br>Tusunami
+      </div>
+      <div>
+        <img src="../../assets/pinera.png" alt="Logo" style="width: 100%;height: 100%;margin-top: 20px;">
+      </div>
     </div>
+
     <div class="form-container">
-      <h2 style="color:#103ed4">Crear cuenta</h2>
-      <v-btn size="medium">
-        Iniciar sesión con <br>google
-      </v-btn>
-      <br><br>
-      <v-btn size="medium">
-        Iniciar sesión con <br> facebook
-      </v-btn>
+      <h2 style="color:#103ed4; padding-bottom: 10px;">Crear cuenta</h2>
+
       <form @submit.prevent="login">
         <div class="input-container">
           <label style="color:#103ed4" for="username">Nombre Completo:</label>
@@ -25,14 +23,14 @@
           <label style="color:#103ed4" for="rut">Rut:</label>
           <input type="text" id="rut" :maxlength="12" :counter="12" v-model="rut" @input="validarRut" required>
           <p v-if="!esRutValido" style="color: red;">El Rut ingresado no es válido.</p>
-          <p style="color: black">El rut tiene el siguiente formato: 12.345.678-9.</p>
+          <p style="color: black">El rut tiene el siguiente formato: 12345678-9.</p>
         </div>
         <div class="input-container">
           <label style="color:#103ed4" for="text">Correo electrónico:</label>
           <input @input="validarEmail" type="text" id="correo electronico" :maxlength="50" :counter="50" v-model="email"
             required>
           <p v-if="esValido"></p>
-          <p v-else style="color: black">El correo electrónico debe contener al menos un "@" y terminar en .com .cl .</p>
+          <p v-else style="color: black">El correo electrónico debe contener al menos un "@".</p>
         </div>
         <div class="input-container">
           <label style="color:#103ed4" for="password">Contraseña:</label>
@@ -54,7 +52,7 @@
     </div>
   </div>
 </template>
-
+  
 <script>
 import API from '@/API.js';
 import Swal from 'sweetalert2';
@@ -123,16 +121,9 @@ export default {
     },
 
     validarEmail() {
-  // Expresión regular para verificar la extensión
-  const expresionRegular = /\.(com|cl|net)$/;
-
-  // Convertir el correo a minúsculas antes de la validación
-  const correoEnMinusculas = this.email.toLowerCase();
-
-  // Verificar si el correo electrónico contiene '@' y si la extensión es válida
-  this.esValido = correoEnMinusculas.includes('@') && expresionRegular.test(correoEnMinusculas);
-  return this.esValido;
-},
+      this.esValido = this.email.includes('@');
+      return this.esValido;
+    },
 
     validarRut() {
       const rutSinPuntos = this.rut.replace(/\./g, '');
@@ -162,81 +153,81 @@ export default {
   },
 };
 </script>
-
+  
 <style scoped>
-h1 {
-  font-size: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bolder;
-  text-align: center;
-}
-
 .registro-container {
+  background-color: #d9d9d9;
   display: flex;
   justify-content: center;
   align-items: center;
-  justify-content: center;
   height: 100vh;
 }
 
 .image-container {
   flex: 1;
-  padding: 50px;
+  padding: 20px;
+  text-align: center;
 }
 
-.image-container img {}
+.image-container img {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
 
 .form-container {
   flex: 1;
-  padding-left: 150px;
-  padding-right: 150px;
-  padding-bottom: 30px;
-  padding-top: 10px;
-  background-color: #ffffff;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  background-color: white;
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: 800;
+  text-align: center;
+  color: #ee451b;
 }
 
 h2 {
   margin-top: 0;
-  font-weight: bolder;
-  align-items: center;
-  justify-content: center;
-  font-weight: bolder;
+  font-size: 30px;
+  font-weight: 800;
   text-align: center;
+  color: #103ed4;
 }
 
-/* Estilos para los campos de entrada */
 .input-container {
-  margin-bottom: 15px;
-  text-align: left;
-  text-decoration: underline;
-  text-decoration-color: #103ed4;
+  margin-bottom: 20px;
 }
 
 label {
   display: block;
-  font-weight: bold;
+  font-weight: 800;
+  color: #103ed4;
 }
 
 input[type="text"],
 input[type="password"] {
   width: 100%;
   padding: 10px;
-  border: 1px solid #0d60c0;
-  border-radius: 5px;
+  border: none;
+  border-bottom: 2px solid #103ed4;
+  font-size: 16px;
+  color: #103ed4;
 }
 
-/* Estilo para el botón de inicio de sesión */
 button {
-  background-color: #ee451b;
-  color: #fff;
+  display: block;
+  margin: 0 auto;
   padding: 10px 20px;
+  background-color: #ee451b;
+  color: #ffffff;
   border: none;
   border-radius: 5px;
-  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 button:hover {

@@ -90,7 +90,7 @@
     </v-app> 
 </template>
 
-<style>
+<style scoped>
 
     .boton{
         color:#ffffff;
