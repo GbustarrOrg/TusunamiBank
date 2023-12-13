@@ -33,7 +33,7 @@ const routes = [
     path: '/iniciarSesion',
     name: 'iniciarSesion',
     component: () => import('./pages/iniciarSesion.vue'),
-  }
+  },
 
   {
     path: '/logintest',
@@ -46,6 +46,12 @@ const routes = [
     name: 'tipoDeCuenta',
     component: () => import('./pages/tipoDeCuenta.vue'),
   },
+
+  {
+    path: '/cuentaAhorro',
+    name: 'cuentaAhorro',
+    component: () => import('./pages/cuentadeahorro.vue'),
+  }
 ];
 
 const router = createRouter({

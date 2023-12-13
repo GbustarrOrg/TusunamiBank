@@ -53,9 +53,10 @@
 						<v-select style="color: #103ed4;" v-model="sucursal" label="Sucursal" :items="[1, 2, 3]"
 							variant="outlined" required></v-select>
 
-						<v-btn block :color="esValido ? '#ee451b' : 'grey'" type="submit" @click="verificarYCrearUsuario"
-							:disabled="!(completeName.length > 0 && contraValida && esRutValido)">Registrar</v-btn>
-
+						<router-link to="/tipoDeCuenta">
+							<v-btn block :color="esValido ? '#ee451b' : 'grey'" type="submit" @click="verificarYCrearUsuario"
+							:disabled="!(completeName.length > 0 && contraValida && esRutValido) ">Registrar</v-btn>
+						</router-link>
 						<div>
 							<h3 style="color:#103ed4; padding-top: 2%;">¿Ya tienes cuenta?
 								<router-link to="login">Iniciar Sesión</router-link>
