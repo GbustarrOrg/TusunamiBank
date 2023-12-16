@@ -49,7 +49,7 @@
             <button class="boton-iniciar-sesion" @click="login">Iniciar Sesión</button>
           </div>
           <div class="fila" style="color: #0f45ab;font-weight: 800;">
-            <p>¿No tienes una cuenta? <a href="#">Registrate</a></p>
+            <p>¿No tienes una cuenta? <router-link to=""><a href="#">Registrate</a></router-link></p>
             <transition-group name="p-message" tag="div">
               <Message v-for="msg of mensajes" :key="msg.id" :severity="msg.severity">{{ msg.content }}</Message>
             </transition-group>
