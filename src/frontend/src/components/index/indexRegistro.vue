@@ -1,65 +1,56 @@
 <!-- Componente designado para contener el formulario de registro del mockup-->
 <!-- Debe contener la logica necesaria para redireccionar hacia home si el registro fue exitoso-->
 <template>
-    <div class="registro-container">
-      <div class="image-container">
-        <h1 style="color: #ee451b">Bancos<br>Tusunami</h1>
-        <img
-          src="https://trello.com/1/cards/654d83f9682db5e91c4b4d00/attachments/654ff6e5f6f7c785ecf36ba5/previews/654ff6e6f6f7c785ecf36bbd/download/pngwing.com.png"
-          alt="Imagen de fondo" width="510" height="510" />
-      </div>
-      <div class="form-container">
-        <h2 style="color:#103ed4">Crear cuenta</h2>
-        <v-btn size="medium">
-          Iniciar sesión con <br>google
-        </v-btn>
-        <br><br>
-        <v-btn size="medium">
-          Iniciar sesión con <br> facebook
-        </v-btn>
-        <form @submit.prevent="login">
-          <div class="input-container">
-            <label style="color:#103ed4" for="username">Nombre Completo:</label>
-            <input type="text" id="username" :maxlength="50" :counter="50" @keypress="soloLetras" v-model="completeName"
-              required>
-          </div>
-          <div class="input-container">
-            <label style="color:#103ed4" for="rut">Rut:</label>
-            <input type="text" id="rut" :maxlength="12" :counter="12" v-model="rut" @input="validarRut" required>
-            <p v-if="!esRutValido" style="color: red;">El Rut ingresado no es válido.</p>
-            <p style="color: black">El rut tiene el siguiente formato: 12345678-9.</p>
-          </div>
-          <div class="input-container">
-            <label style="color:#103ed4" for="text">Correo electrónico:</label>
-            <input @input="validarEmail" type="text" id="correo electronico" :maxlength="50" :counter="50" v-model="email"
-              required>
-            <p v-if="esValido"></p>
-            <p v-else style="color: black">El correo electrónico debe contener al menos un "@".</p>
-          </div>
-          <div class="input-container">
-            <label style="color:#103ed4" for="password">Contraseña:</label>
-            <input type="password" id="password" :maxlength="50" :counter="50" v-model="password" required>
-          </div>
-  
-          <v-select style="color: #103ed4;" v-model="sucursal" label="Sucursal" :items="[1, 2, 3]" variant="outlined"
-            required></v-select>
-  
-          <v-btn block :color="esValido ? '#ee451b' : 'grey'" type="submit" @click="verificarYCrearUsuario"
-            :disabled="!(completeName.length > 0 && password.length > 0 && esRutValido)">Registrar</v-btn>
-          <div>
-            <h3 style="color:#103ed4">¿Ya tienes cuenta?
-              <router-link to="login">Iniciar Sesión</router-link>
-              <br><br>
-            </h3>
-          </div>
-        </form>
-      </div>
+  <div class="registro-container">
+    <div class="image-container">
+      <h1 style="color: #ee451b;">Bancos<br>Tusunami</h1>
+      <img
+        src="https://trello.com/1/cards/654d83f9682db5e91c4b4d00/attachments/654ff6e5f6f7c785ecf36ba5/previews/654ff6e6f6f7c785ecf36bbd/download/pngwing.com.png"
+        alt="Imagen de fondo" width="510" height="510" />
     </div>
-  </template>
+    <div class="form-container">
+      <h2 style="color: #103ed4;">Crear cuenta</h2>
+      <form @submit.prevent="login">
+        <div class="input-container">
+          <label style="color: #103ed4;" for="username">Nombre Completo:</label>
+          <input type="text" id="username" :maxlength="50" :counter="50" @keypress="soloLetras" v-model="completeName"
+            required>
+        </div>
+        <div class="input-container">
+          <label style="color: #103ed4;" for="rut">Rut:</label>
+          <input type="text" id="rut" class="underline-input" name="rut" v-model="rut">
+            <p id="mensajeRUT" style="color: red;">{{mensajeRUT}}</p>
+          <p style="color: black;">El rut tiene el siguiente formato: 12345678-9.</p>
+        </div>
+        <div class="input-container">
+          <label style="color: #103ed4;" for="email">Correo electrónico:</label>
+          <input @input="validarEmail" type="text" id="email" :maxlength="50" :counter="50" v-model="email" required>
+          <p v-if="esValido"></p>
+          <p v-else style="color: black;">El correo electrónico debe contener al menos un "@".</p>
+        </div>
+        <div class="input-container">
+          <label style="color: #103ed4;" for="password">Contraseña:</label>
+          <input type="password" id="password" :maxlength="50" :counter="50" v-model="password" required>
+        </div>
+
+        <v-select style="color: #103ed4;" v-model="sucursal" label="Sucursal" :items="[1, 2, 3]" variant="outlined"
+          required></v-select>
+
+        <v-btn block :color="esValido ? '#ee451b' : 'grey'" type="submit" @click="verificarYCrearUsuario"
+          :disabled="!(completeName.length > 0 && password.length > 0 && esRutValido)">Registrar</v-btn>
+        <div>
+          <h3 style="color: #103ed4;">¿Ya tienes cuenta?
+            <router-link to="login">Iniciar Sesión</router-link>
+            <br><br>
+          </h3>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>
   
   <script>
   import API from '@/API.js';
-  import Swal from 'sweetalert2';
   
   export default {
     data() {
@@ -75,85 +66,61 @@
     },
   
     methods: {
-      async verificarYCrearUsuario() {
-        // Verificar rut y correo
-        if (this.validarRut() && this.validarEmail()) {
-          await this.crearUsuario();
-        } else {
-          Swal.fire({
-            icon: 'error',
             title: 'Error de Registro',
-            text: 'Rut o correo incorrecto',
-          });
-          console.log("Error de registro");
-        }
-      },
-  
-      async crearUsuario() {
-        const nombre = this.completeName.split(' ');
-        const numeroDeUsuarios = await API.getNumeroUsuarios();
-        await API.addUsuario({
-          "nombres": nombre[0] + " " + nombre[1],
-          "apellidoPaterno": nombre[2],
-          "apellidoMaterno": nombre[3],
-          "email": this.email.toLowerCase(),
-          "rut": this.rut,
-          "password": this.password,
-          "sucursal": this.sucursal,
-          "idUsuario": numeroDeUsuarios + 1
-        })
-          .then((response) => {
-  
-            if (response.Respuesta == true) {
-              Swal.fire({
-                icon: 'success',
-                title: 'Registro Exitoso',
-              })
-              console.log("Registro exitoso")
-  
-  
-            } else {
-  
-              Swal.fire({
-                icon: 'error',
-                title: 'Error de Registro',
-                text: 'Uno de los campos esta mal ingresado'
-              })
-              console.log("Error de registro")
-            }
-          })
-      },
-  
+      
       validarEmail() {
         this.esValido = this.email.includes('@');
         return this.esValido;
       },
-  
-      validarRut() {
-        const rutSinPuntos = this.rut.replace(/\./g, '');
-        const [rutNumeros, rutDV] = rutSinPuntos.split('-');
-        this.esRutValido = true//this.dv(rutNumeros) === rutDV;
-        return true;
-      },
-  
-      dv(T) {
-        let M = 0, S = 1;
-        for (; T; T = Math.floor(T / 10))
-          S = (S + T % 10 * (9 - M++ % 6)) % 11;
-        return S ? String(S - 1) : 'K';
-      },
-  
-      soloLetras(event) {
-        const pattern = /^[a-zA-Z\s]+$/; // Permitir solo letras y espacios
-        if (!pattern.test(event.key)) {
-          event.preventDefault();
-        }
-      },
-  
       login() {
         // Lógica de inicio de sesión
         // console.log('Iniciando sesión...');
+        this.validarRut()
       },
+      validarRut() {
+        const rut = this.rut;
+        const partesRUT = rut.split("-");
+        
+        // Verificar que haya dos partes (número y dígito verificador)
+        if (partesRUT.length !== 2) {
+            console.log("RUT inválido - Debe contener un guion");
+            mostrarMensajeError("RUT inválido");
+            this.esRutValido=false;
+            return false;
+        }
+
+        const numeroRUT = partesRUT[0];
+        const digitoVerificador = partesRUT[1];
+
+        // Verificar que el número sea un entero positivo
+        if (!/^\d+$/.test(numeroRUT) || (numeroRUT.length !== 8)) {
+            console.log("RUT inválido - Parte numérica debe contener solo dígitos");
+            mostrarMensajeError("RUT inválido");
+            this.esRutValido=false;
+            return false;
+        }
+
+        // Verificar que el dígito verificador sea un dígito o 'k'/'K'
+        if (!/^\d$|[kK]$/.test(digitoVerificador)) {
+            console.log("RUT inválido - Dígito verificador no válido");
+            mostrarMensajeError("RUT inválido");
+            this.esRutValido=false;
+            return false;
+        }
+
+        console.log("RUT válido");
+        this.esRutValido=true;
+        return true;
+      },
+      mostrarMensajeError(mensaje) {
+        // Simular la lógica para mostrar un mensaje de error (puedes adaptarlo según tu entorno)
+        console.error(mensaje);
+        this.mensajeRUT = mensaje
+        // Ejemplo de código para limpiar el mensaje después de 2000 milisegundos (2 segundos)
+        setTimeout(() => {
+            console.clear(); // Limpiar la consola (puedes adaptarlo según tu entorno)
+        }, 2000);
+      }
     },
   };
   </script>
