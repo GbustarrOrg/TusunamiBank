@@ -6,6 +6,7 @@
     import topPanel from '../components/home/topPanel.vue';
     import leftPanel from '../components/home/leftPanel.vue';
     import mainPanel from '../components/home/mainPanel.vue';
+    import bottomPanel from '../components/home/bottomPanel.vue';
     import {ref,reactive} from 'vue';
 
     const tipoCuentaN = reactive({
@@ -82,6 +83,9 @@
                 <mainPanel v-if="tipoCuentaN.tipo === 3" :listaTransacciones="lt_Vista" :infoCuenta="iVista"></mainPanel>
             </Column>
         </Row>
+        <Row>
+            <bottomPanel></bottomPanel>
+        </Row>
     </div>
 </template>
 
@@ -93,6 +97,7 @@
     width: 100%;
     min-height: 100%;
     background-color: #d52b1e;
+    height: 100%;
 }
 .contenedor{
     display: flex;
