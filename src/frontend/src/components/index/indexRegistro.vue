@@ -11,13 +11,7 @@
     </div>
     <div class="form-container">
       <h2 style="color:#103ed4">Crear cuenta</h2>
-      <v-btn size="medium">
-        Iniciar sesión con <br>google
-      </v-btn>
-      <br><br>
-      <v-btn size="medium">
-        Iniciar sesión con <br> facebook
-      </v-btn>
+      
       <form @submit.prevent="login">
         <div class="input-container">
           <label style="color:#103ed4" for="username">Nombre Completo:</label>
