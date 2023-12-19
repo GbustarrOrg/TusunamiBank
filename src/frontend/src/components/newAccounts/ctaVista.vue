@@ -1,10 +1,85 @@
 <template>
+  <body class="body">
     
-    <v-otp-input :length="9" v-model="idUsuario" variant="solo-filled"></v-otp-input>
-    <v-btn class="boton-contratar"  @click="contratarCuentaVista" >Contratar</v-btn>
+  
+  <div>
+    <card class="cardPrincipal">
+      
+    <h1 class="texto"> Crear cuenta vista </h1>
+
+    <p class="texto"> 
+        La cuenta Vista es la más limitada (para rotos), con un limite de saldo de $2,500,000, lo que
+        significa que no puedes realizar depósitos sobre ese monto. Asimismo, no pueden realizarse
+        retiros por debajo de $0 pesos, y solo los primeros 4 retiros son gratuitos. Cada retiro posterior
+        tiene un
+         costo de $400 pesos.
+      </p>
+      <img src="../assets/pinerasaltando.jpg">
+      <h3 class="texto"> Proporciona tu rut para confirmar</h3>
+
+      <v-otp-input :length="9" v-model="idUsuario" variant="solo-filled"></v-otp-input>
+
+      <p class="texto2">El rut tiene el siguiente formato: 12345678-9</p>
+
+      <div class="contenedor">
+        <v-text-field label="Rut" class="labelnum"></v-text-field>
+        <p class="texto2">-</p>
+        <v-combobox class="comboboxdig" label="" :items="[ '0','1', '2', '3', '4', '5', '6', '7','8', '9','K']"></v-combobox>
+      </div>
+
+      <v-btn class="boton-contratar"  @click="contratarCuentaVista" >Contratar</v-btn>
+
+      
+
+    </card>
+  </div>
+  </body>
+   
+    
 
 
+
+    
 </template>
+
+<style>
+
+.labelnum{
+  width: 75%;
+  color: black;
+}
+.comboboxdig{
+  width: 15%;
+  color: black;
+}
+.body{
+  background-color: grey;
+  width: 100;
+  height: 100%;
+  display: flex;
+  
+}
+.cardPrincipal{
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  
+}
+.texto{
+  color: #0039A6;
+}
+.texto2{
+  color: black;
+}
+.boton-contratar{
+  width: 25%;
+  background-color: #d52b1e;
+  color: white;
+}
+</style>
+
+
+
 <script setup>
   import { ref } from 'vue';
   import API from '@/API.js';
