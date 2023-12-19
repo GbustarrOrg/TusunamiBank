@@ -27,12 +27,12 @@ const routes = [
     path: '/login',
     name: 'login',
     component: () => import('./components/Login/LoginPage.vue')
-  {
+  },{
     path: '/creacioncuenta',
     name: 'creacioncuenta',
     component: () => import('./pages/creacioncuenta.vue'),
   },
-  },
+ 
 
   {
     path: '/registro',
