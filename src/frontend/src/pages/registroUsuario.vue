@@ -79,64 +79,49 @@ export default {
 			// Verificar rut y correo
 			if (this.validarRut() && this.validarEmail()) {
 
-				try {
-					await this.crearUsuario();
-					this.$router.push({ name: 'cuentas' });
+				await this.crearUsuario();
 
-				} catch (error) {
-					Swal.fire({
-						icon: 'error',
-						title: 'Error de Registro',
-						text: 'Hubo un error al crear el usuario',
-					});
-					console.error('Error al crear usuario', error);
-				}
 			} else {
 				Swal.fire({
 					icon: 'error',
 					title: 'Error de Registro',
 					text: 'Rut o correo incorrecto',
 				});
-				console.log('Error de registro');
+				console.log("Error de registro");
 			}
 		},
 
 		async crearUsuario() {
 			const nombre = this.completeName.split(' ');
 			const numeroDeUsuarios = await API.getNumeroUsuarios();
-			const usuarioData = {
-				nombres: nombre[0] + ' ' + nombre[1],
-				apellidoPaterno: nombre[2],
-				apellidoMaterno: nombre[3],
-				email: this.email.toLowerCase(),
-				rut: this.rut,
-				password: this.password,
-				sucursal: this.sucursal,
-				idUsuario: numeroDeUsuarios + 1,
-			};
 
-			try {
-				const response = await API.addUsuario(usuarioData);
+			await API.addUsuario({
+				"nombres": nombre[0] + " " + nombre[1],
+				"apellidoPaterno": nombre[2],
+				"apellidoMaterno": nombre[3],
+				"email": this.email.toLowerCase(),
+				"rut": this.rut,
+				"password": this.password,
+				"sucursal": this.sucursal,
+				"idUsuario": numeroDeUsuarios + 1
+			})
+				.then((response) => {
+					if (response.Respuesta == true) {
+						Swal.fire({
+							icon: 'success',
+							title: 'Ha sido registrado',
+						})
+						this.$router.push({ path: '/cuentas' })
 
-				if (response.Respuesta === true) {
-					Swal.fire({
-						icon: 'success',
-						title: 'Registro Exitoso',
-					});
-					console.log('Registro exitoso');
+					} else {
 
-				} else {
-					throw new Error('Uno de los campos está mal ingresado');
-				}
-			} catch (error) {
-				Swal.fire({
-					icon: 'error',
-					title: 'Error de Registro',
-					text: 'Hubo un error al procesar la solicitud',
-				});
-				console.error('Error al crear usuario', error);
-				throw error;
-			}
+						Swal.fire({
+							icon: 'error',
+							title: 'Error al registrar',
+							text: 'Ingrese nuevamente los datos'
+						})
+					}
+				})
 		},
 
 		validarPassword() {

@@ -71,7 +71,7 @@
 
 <style>
 .center-container {
-  display: flex;
+  display: inline-block;
   min-width: 50%;
   align-items: center;
 }
