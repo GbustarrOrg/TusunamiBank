@@ -75,7 +75,8 @@ import Swal from 'sweetalert2';
     methods: {
 
         validarFormato(vrut){
-            const rutRegex = /^[0-9]+[-|‐]{1}[0-9kK]{1}$/;
+            // debe tener punto y guion
+            var rutRegex = new RegExp("[0-9]{1,2}\.[0-9]{3}\.[0-9]{3}\-[0-9kK]{1}");
             // Validar el formato
             if (rutRegex.test(vrut)) {
               console.log("valido")

@@ -2,6 +2,11 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
   {
+    path: '/ctaVista',
+    name: 'ctaVista',
+    component: () => import('./components/newAccounts/ctaVista.vue'),
+  },
+  {
     path: '/',
     name: 'index',
     component: () => import('./pages/index.vue'),
