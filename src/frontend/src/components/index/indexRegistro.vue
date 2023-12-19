@@ -18,26 +18,26 @@
         </div>
         <div class="input-container">
           <label style="color: #103ed4;" for="rut">Rut:</label>
-          <input type="text" id="rut" class="underline-input" name="rut" v-model="rut">
+          <input type="text" id="rut" class="underline-input" name="rut" v-model="rut" @input="validarRut" required>
             <p id="mensajeRUT" style="color: red;">{{mensajeRUT}}</p>
           <p style="color: black;">El rut tiene el siguiente formato: 12345678-9.</p>
         </div>
         <div class="input-container">
           <label style="color: #103ed4;" for="email">Correo electrónico:</label>
-          <input @input="validarEmail" type="text" id="email" :maxlength="50" :counter="50" v-model="email" required>
+          <input type="text" id="email" :maxlength="50" :counter="50" v-model="email" @input="validarEmail" required>
           <p v-if="esValido"></p>
           <p v-else style="color: black;">El correo electrónico debe contener al menos un "@".</p>
         </div>
         <div class="input-container">
           <label style="color: #103ed4;" for="password">Contraseña:</label>
-          <input type="password" id="password" :maxlength="50" :counter="50" v-model="password" required>
+          <input type="password" id="password" :maxlength="50" :counter="50" v-model="password" @input="validarPassword" required >
         </div>
 
         <v-select style="color: #103ed4;" v-model="sucursal" label="Sucursal" :items="[1, 2, 3]" variant="outlined"
           required></v-select>
 
         <v-btn block :color="esValido ? '#ee451b' : 'grey'" type="submit" @click="verificarYCrearUsuario"
-          :disabled="!(completeName.length > 0 && password.length > 0 && esRutValido)">Registrar</v-btn>
+          :disabled="!(completeName.length > 0 && esPasswordValido && esRutValido && esPasswordValido)">Registrar</v-btn>
         <div>
           <h3 style="color: #103ed4;">¿Ya tienes cuenta?
             <router-link to="login">Iniciar Sesión</router-link>
@@ -61,30 +61,36 @@
         password: '',
         sucursal: '',
         esValido: false,
-        esRutValido: true,
+        esRutValido: false,
+        esPasswordValido: false
       };
     },
   
     methods: {
             title: 'Error de Registro',
-      
-      validarEmail() {
-        this.esValido = this.email.includes('@');
-        return this.esValido;
+      validarPassword(){
+        var regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+        this.esPasswordValido = regex.test(this.password);
+        console.log(this.esPasswordValido)
+        return this.esPasswordValido;
       },
+
+      validarEmail() {
+      const regex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+      this.esValido = regex.test(this.email);
+      return this.esValido;
+      },
+
       login() {
         // Lógica de inicio de sesión
         // console.log('Iniciando sesión...');
-        this.validarRut()
       },
+
       validarRut() {
         const rut = this.rut;
         const partesRUT = rut.split("-");
-        
-        // Verificar que haya dos partes (número y dígito verificador)
         if (partesRUT.length !== 2) {
             console.log("RUT inválido - Debe contener un guion");
-            mostrarMensajeError("RUT inválido");
             this.esRutValido=false;
             return false;
         }
@@ -92,18 +98,13 @@
         const numeroRUT = partesRUT[0];
         const digitoVerificador = partesRUT[1];
 
-        // Verificar que el número sea un entero positivo
         if (!/^\d+$/.test(numeroRUT) || (numeroRUT.length !== 8)) {
             console.log("RUT inválido - Parte numérica debe contener solo dígitos");
-            mostrarMensajeError("RUT inválido");
             this.esRutValido=false;
             return false;
         }
-
-        // Verificar que el dígito verificador sea un dígito o 'k'/'K'
         if (!/^\d$|[kK]$/.test(digitoVerificador)) {
             console.log("RUT inválido - Dígito verificador no válido");
-            mostrarMensajeError("RUT inválido");
             this.esRutValido=false;
             return false;
         }
@@ -112,15 +113,6 @@
         this.esRutValido=true;
         return true;
       },
-      mostrarMensajeError(mensaje) {
-        // Simular la lógica para mostrar un mensaje de error (puedes adaptarlo según tu entorno)
-        console.error(mensaje);
-        this.mensajeRUT = mensaje
-        // Ejemplo de código para limpiar el mensaje después de 2000 milisegundos (2 segundos)
-        setTimeout(() => {
-            console.clear(); // Limpiar la consola (puedes adaptarlo según tu entorno)
-        }, 2000);
-      }
     },
   };
   </script>
