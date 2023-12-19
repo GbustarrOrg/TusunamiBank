@@ -14,7 +14,7 @@
                     <v-btn variant="outlined" rounded>Abre Tu Cuenta</v-btn>
                 </v-col>
                 <v-col style="height:100%">
-                    <v-btn variant="outlined" rounded>Ingresar</v-btn>
+                    <v-btn variant="outlined" rounded><router-link to="login">Ingresar</router-link></v-btn>
                 </v-col>
                 <v-col></v-col>
             </v-toolbar-items>
