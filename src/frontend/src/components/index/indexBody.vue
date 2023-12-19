@@ -5,7 +5,7 @@ import indexRegistro from './indexRegistro.vue';
 
 <template>
     <div>
-        <v-img style="height: 550px;" cover src="../../assets/pineraycia.png"></v-img>
+        
         <indexRegistro></indexRegistro>
     </div>
 </template>
