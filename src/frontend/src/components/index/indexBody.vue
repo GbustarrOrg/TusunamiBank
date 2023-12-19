@@ -14,7 +14,7 @@
                     <router-link to="/registro"><v-btn variant="outlined" @click="routerRegistro" rounded>Abre Tu Cuenta</v-btn></router-link>
                 </v-col>
                 <v-col style="height:100%">
-                    <Router-link to="/login"><v-btn variant="outlined" @click="routerIngresar" rounded>Ingresar</v-btn></router-link>
+                    <v-btn variant="outlined" rounded><router-link to="login">Ingresar</router-link></v-btn>
                 </v-col>
                 <v-col></v-col>
             </v-toolbar-items>
