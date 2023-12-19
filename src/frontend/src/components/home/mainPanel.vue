@@ -1,22 +1,13 @@
 <script setup>
     import VirtualScroller from 'primevue/virtualscroller';
     import Card from 'primevue/card';
-    import Button from 'primevue/button';
-    //lista con "transacciones, estas se mostraran en el scroll, deberian ser transacciones desde la bd"
-    const listaTransacciones = [
-    { fecha: '1/09/2019', tipo: 'Deposito', sucursal: 'Islas Caimán', monto: '5.000.000' },
-    { fecha: '2/04/2020', tipo: 'Retiro', sucursal: 'Talca', monto: '2.000.000.000' },
-    { fecha: '3/09/2021', tipo: 'Deposito', sucursal: 'Santiago', monto: '500.000' },
-    { fecha: '4/09/2022', tipo: 'Retiro', sucursal: 'Islas Caimán', monto: '2.000.000' },
-    
-    ];
-    //informacion de la cuenta actual , se actualizan en la card
-    const infoCuenta={
-        tipo:'Corriente',
-        numCuenta:'000000001',
-        saldo:'Infinito',
-        sucursal:'Curicó'
-    };
+    import {defineProps} from 'vue';
+   
+    const props = defineProps({
+        listaTransacciones:Array,
+        infoCuenta:Object,
+    });
+
 </script>
 
 <style>
@@ -111,30 +102,35 @@
         <row>
         <Card class="cardPrincipal">
             <template #title > 
-                <div style="text-align: center; font-weight: bold; color:black;">Cuenta {{ infoCuenta.tipo }} </div>
+                <div class="my-5" style="text-align: center; font-weight: bold; color:black;">Cuenta {{ infoCuenta.tipo }} </div>
             </template>
           <template #content>
             <column style="height:40%">
-            <Card class="cardCuenta">
+            <Card class="cardCuenta mx-2">
               <template #content>
-                Cuenta: #{{ infoCuenta.numCuenta }} <br>
-                Saldo: {{infoCuenta.saldo}} <br>
-                Sucursal: {{infoCuenta.sucursal}}<br>
-                <br>
-                <div>
+                <div class="my-3 mx-2">                
+                    Cuenta: #{{ infoCuenta.numCuenta }} <br>
+                    Saldo: ${{infoCuenta.saldo}} <br>
+                    Sucursal: {{infoCuenta.sucursal}}<br>
+                </div>
+                <div class="my-4">
                     <row>
-                        <Button label="Realizar Depósito" text raised  class="botonDeposito"/>
+                        <v-btn class="mx-2" variant="text" rounded style="background-color: #ffff; color:#d52b1e">
+                            Realizar Deposito
+                        </v-btn>
                     </row>
                     <row>
-                        <Button label="Realizar Retiro" text raised class="botonRetiro"/>
+                        <v-btn class="mx-2" variant="text" rounded style="background-color: #d52b1e; color:#ffff">
+                            Realizar Retiro
+                        </v-btn>
                     </row>
                 </div>
               </template>
             </Card>
             </column>
             <column>
-                <Card class="cardScroll" style="height: 60%;">
-                <template #title><div style="text-align: center; font-weight: bold; color:black;">Últimas Transacciones</div> </template>
+                <Card class="cardScroll mx-2 my-13" style="height: 60%;">
+                <template #title><div class="my-5" style="text-align: center; font-weight: bold; color:black;">Últimas Transacciones</div> </template>
                 <template #content>
                     <VirtualScroller :items="listaTransacciones" :itemSize="100" class="scrollTransaccion">
                     <template v-slot:item="{ item }">
