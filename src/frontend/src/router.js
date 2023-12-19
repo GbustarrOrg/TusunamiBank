@@ -7,6 +7,11 @@ const routes = [
     component: () => import('./components/newAccounts/ctaVista.vue'),
   },
   {
+    path: '/creacionCuentas',
+    name: 'creacionCuentas',
+    component: () => import('./components/newAccounts/creacionCuentas.vue'),
+  },
+  {
     path: '/',
     name: 'index',
     component: () => import('./pages/index.vue'),
