@@ -19,6 +19,17 @@
           </div>
 
           <div class="fila">
+            <div class="login-buttons">
+              <button @click="iniciarSesionConGoogle" class="login-button google-button" ><i class="pi pi-google" style="color: white"></i>Iniciar Sesión con Google</button>
+              <button class="login-button facebook-button"><i class="pi pi-facebook" style="color: white"></i>Iniciar Sesión con Facebook</button>
+            </div>
+          </div>
+
+          <div class="fila"
+            style="text-align: center;color: #0f45ab; margin-top: 30px;font-weight: 800;font-size: 30px;">
+            -o-
+          </div>
+          <div class="fila">
             <div class="input-container">
               <label for="miCuadroDeTexto" style="color: #0f45ab;font-weight: 800;">RUT:</label>
               <input type="text" id="rut" class="underline-input" name="rut">
@@ -35,7 +46,7 @@
             <button class="boton-iniciar-sesion" @click="login">Iniciar Sesión</button>
           </div>
           <div class="fila" style="color: #0f45ab;font-weight: 800;">
-            <p>¿No tienes una cuenta? <router-link to=""><a href="#">Registrate</a></router-link></p>
+            <p>¿No tienes una cuenta? <a href="#">Registrate</a></p>
             <transition-group name="p-message" tag="div">
               <Message v-for="msg of mensajes" :key="msg.id" :severity="msg.severity">{{ msg.content }}</Message>
             </transition-group>
@@ -49,6 +60,7 @@
 <script>
     import API from '@/API.js';
     import Message from 'primevue/message';
+    import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
     export default{
         data () {
@@ -112,6 +124,18 @@
             }); 
      
         },
+        async iniciarSesionConGoogle() {
+          console.log('Iniciando sesión con Google...');
+          const auth = getAuth();
+          const provider = new GoogleAuthProvider();
+          try {
+              const result = await signInWithPopup(auth, provider);
+              const user = result.user;
+              console.log('Usuario autenticado con Google:', user);
+          } catch (error) {
+              console.error('Error de autenticación con Google:', error.message);
+          }
+      },
     }
 };
 </script>
@@ -163,6 +187,9 @@ body {
   font-size: 16px;
 }
 
+
+
+
 .boton-iniciar-sesion {
   display: block;
   margin: 0 auto;
@@ -175,6 +202,10 @@ body {
   cursor: pointer;
 }
 
+
+
+
+
     .login-buttons {
       text-align: center;
     }
@@ -185,6 +216,16 @@ body {
       font-size: 16px;
       margin: 5px;
       cursor: pointer;
+    }
+
+    .google-button {
+      background-color: #4285F4;
+      color: #ffffff;
+    }
+
+    .facebook-button {
+      background-color: #3b5998;
+      color: #ffffff;
     }
 
 </style>
