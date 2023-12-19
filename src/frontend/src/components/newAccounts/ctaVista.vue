@@ -4,7 +4,7 @@
   
   <div>
     <card class="cardPrincipal">
-      
+
     <h1 class="texto"> Crear cuenta vista </h1>
 
     <p class="texto"> 
@@ -17,20 +17,30 @@
       <img src="../assets/pinerasaltando.jpg">
       <h3 class="texto"> Proporciona tu rut para confirmar</h3>
 
-      <v-otp-input :length="9" v-model="idUsuario" variant="solo-filled"></v-otp-input>
+      
+
+
+
+      <div class="contenedor">
+        <div class="casilla">
+          <v-text-field label="Rut" class="labelnum" v-model="idUsuario"></v-text-field>
+        </div>
+        <div class="casilla">
+          <p class="texto2">-</p>
+        </div>
+        <div class="casilla">
+          <v-combobox class="comboboxdig" v-model="digv" label="" :items="[ '0','1', '2', '3', '4', '5', '6', '7','8', '9','K']"></v-combobox>
+        </div>
+        
+       
+        
+      </div>
+
 
       <p class="texto2">El rut tiene el siguiente formato: 12345678-9</p>
 
-      <div class="contenedor">
-        <v-text-field label="Rut" class="labelnum"></v-text-field>
-        <p class="texto2">-</p>
-        <v-combobox class="comboboxdig" label="" :items="[ '0','1', '2', '3', '4', '5', '6', '7','8', '9','K']"></v-combobox>
-      </div>
-
-      <v-btn class="boton-contratar"  @click="contratarCuentaVista" >Contratar</v-btn>
-
       
-
+      <v-btn class="boton-contratar"  @click="contratarCuentaVista" >Contratar</v-btn>
     </card>
   </div>
   </body>
@@ -43,13 +53,21 @@
 </template>
 
 <style>
-
+.contenedor{
+  display: flex;
+  background-color: white;
+  gap: 10px;
+}
+.casilla{
+  flex:1;
+  float: left;
+}
 .labelnum{
-  width: 75%;
+  width: 100%;
   color: black;
 }
 .comboboxdig{
-  width: 15%;
+  width: 20%;
   color: black;
 }
 .body{
@@ -89,6 +107,7 @@
   const comisionMensual = ref(0);
   const numRetiros = ref(0);
   const idUsuario = ref('');
+  const digv = ref('');
   const sucursal = ref('None');
   const intereses = ref(0);
   const saldo = ref(0);
@@ -113,7 +132,7 @@
         // Devuelve el RUT formateado
         return `${rutFormateado}-${ultimosDigitos}`;
     };
-    const validaRut = formatearRut(idUsuario.value);
+    const validaRut = formatearRut(idUsuario.value+digv.value);
     console.log("rut: " + validaRut)
     const numCuenta = await API.getNumeroCuentaVista();
     const confirmRut = await API.confirmarUsuarioByRut(validaRut);
