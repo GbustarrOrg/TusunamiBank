@@ -6,10 +6,22 @@ const routes = [
     name: 'index',
     component: () => import('./pages/index.vue'),
   },
+
   {
     path: '/home',
     name: 'home',
     component: () => import('./pages/home.vue'),
+  },
+  {
+    path: '/cuentas',
+    name: 'cuentas',
+    component: () => import('./pages/cuentas.vue'),
+  },
+
+  {
+    path: '/registroUsuario',
+    name: 'registro',
+    component: () => import('./pages/registroUsuario.vue'),
   },
 ];
 
