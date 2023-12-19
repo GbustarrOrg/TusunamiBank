@@ -21,12 +21,6 @@
             Inicia Sesión
           </div>
 
-          <div class="fila">
-            <div class="login-buttons">
-              <button @click="iniciarSesionConGoogle" class="login-button google-button" ><i class="pi pi-google" style="color: white"></i>Iniciar Sesión con Google</button>
-              <button class="login-button facebook-button"><i class="pi pi-facebook" style="color: white"></i>Iniciar Sesión con Facebook</button>
-            </div>
-          </div>
 
           <div class="fila"
             style="text-align: center;color: #0f45ab; margin-top: 30px;font-weight: 800;font-size: 30px;">
