@@ -1,0 +1,164 @@
+<template>
+  <body class="body">
+    
+  
+  <div>
+    <card class="cardPrincipal">
+
+    <h1 class="texto"> Crear cuenta vista </h1>
+
+    <p class="texto"> 
+        La cuenta Vista es la más limitada (para rotos), con un limite de saldo de $2,500,000, lo que
+        significa que no puedes realizar depósitos sobre ese monto. Asimismo, no pueden realizarse
+        retiros por debajo de $0 pesos, y solo los primeros 4 retiros son gratuitos. Cada retiro posterior
+        tiene un
+         costo de $400 pesos.
+      </p>
+      <img src="../assets/pinerasaltando.jpg">
+      <h3 class="texto"> Proporciona tu rut para confirmar</h3>
+
+      
+
+
+
+      <div class="contenedor">
+        <div class="casilla">
+          <v-text-field label="Rut" class="labelnum" v-model="idUsuario"></v-text-field>
+        </div>
+        <div class="casilla">
+          <p class="texto2">-</p>
+        </div>
+        <div class="casilla">
+          <v-combobox class="comboboxdig" v-model="digv" label="" :items="[ '0','1', '2', '3', '4', '5', '6', '7','8', '9','K']"></v-combobox>
+        </div>
+        
+       
+        
+      </div>
+
+
+      <p class="texto2">El rut tiene el siguiente formato: 12345678-9</p>
+
+      
+      <v-btn class="boton-contratar"  @click="contratarCuentaVista" >Contratar</v-btn>
+    </card>
+  </div>
+  </body>
+   
+    
+
+
+
+    
+</template>
+
+<style>
+.contenedor{
+  display: flex;
+  background-color: white;
+  gap: 10px;
+}
+.casilla{
+  flex:1;
+  float: left;
+}
+.labelnum{
+  width: 100%;
+  color: black;
+}
+.comboboxdig{
+  width: 20%;
+  color: black;
+}
+.body{
+  background-color: grey;
+  width: 100;
+  height: 100%;
+  display: flex;
+  
+}
+.cardPrincipal{
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  
+}
+.texto{
+  color: #0039A6;
+}
+.texto2{
+  color: black;
+}
+.boton-contratar{
+  width: 25%;
+  background-color: #d52b1e;
+  color: white;
+}
+</style>
+
+
+
+<script setup>
+  import { ref } from 'vue';
+  import API from '@/API.js';
+  import Swal from 'sweetalert2';
+  import { useRouter } from 'vue-router';
+  
+  const comisionMensual = ref(0);
+  const numRetiros = ref(0);
+  const idUsuario = ref('');
+  const digv = ref('');
+  const sucursal = ref('None');
+  const intereses = ref(0);
+  const saldo = ref(0);
+  const router = useRouter();
+
+  const contratarCuentaVista = async () => {
+    //HACER ESTILOS DE CONFIRMACION AQUI
+    createCuentaVista();
+  }
+  const createCuentaVista = async () => {
+    const formatearRut = (rutSinFormato) => {
+        // Asegúrate de que el RUT sin formato sea una cadena
+        rutSinFormato = String(rutSinFormato);
+
+        // Obtén los últimos dígitos y el dígito verificador
+        const ultimosDigitos = rutSinFormato.slice(-1);
+        const digitosRestantes = rutSinFormato.slice(0, -1);
+
+        // Separa los dígitos en grupos de tres desde el final
+        const rutFormateado = digitosRestantes.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+        // Devuelve el RUT formateado
+        return `${rutFormateado}-${ultimosDigitos}`;
+    };
+    const validaRut = formatearRut(idUsuario.value+digv.value);
+    console.log("rut: " + validaRut)
+    const numCuenta = await API.getNumeroCuentaVista();
+    const confirmRut = await API.confirmarUsuarioByRut(validaRut);
+    console.log("data de rut: " + confirmRut.Respuesta)
+    if (confirmRut.Respuesta === true) {
+      
+      const response = await API.addCuentaVista({
+        "nRetiros": numRetiros.value,
+        "numeroCuenta": numCuenta + 1,
+        "comisionMensual": comisionMensual.value,
+        "interes": intereses.value,
+        "saldo": saldo.value,
+        "sucursal": sucursal.value, //ref susucrsal
+        "idUsuario": validaRut //ref usuario
+        
+      }).then((response) => {
+        console.log(response.data);
+        console.log("bd ctavista creada")
+      }).catch((error) => {
+        console.log("error al crear ctavista");
+        console.log(error);
+      });
+    }
+  }
+
+
+
+
+</script>

@@ -36,6 +36,25 @@ router.get('/getNumeroUsuarios', async(req, res) => {
   }
 );
 
+router.get('/confirmarUsuarioByRut/:rut', async(req, res) => { 
+  const rut = req.params.rut;
+  const filtro = {"rut":rut}
+  await usuarioSchema.findOne(filtro)
+  .then((result) => {
+    if (result === null) {
+      res.json({
+        "Respuesta": false
+      })
+    }
+    else{
+      res.json({
+        "Respuesta": true
+      })
+    }
+    
+  });
+});
+
 
 router.get('/getUsuarioByID/:id', async(req, res) => {
   const id = req.params.id;  
