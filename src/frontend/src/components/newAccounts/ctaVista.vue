@@ -4,23 +4,21 @@
   
   <div>
     <card class="cardPrincipal">
-
     <h1 class="texto"> Crear cuenta vista </h1>
-
-    <p class="texto"> 
-        La cuenta Vista es la más limitada (para rotos), con un limite de saldo de $2,500,000, lo que
+    <div class="contenedor">
+      <div class="casilla">
+        <p class="texto"> 
+          La cuenta Vista es la más limitada (para rotos), con un limite de saldo de $2,500,000, lo que
         significa que no puedes realizar depósitos sobre ese monto. Asimismo, no pueden realizarse
         retiros por debajo de $0 pesos, y solo los primeros 4 retiros son gratuitos. Cada retiro posterior
-        tiene un
-         costo de $400 pesos.
-      </p>
-      <img src="../assets/pinerasaltando.jpg">
+        tiene un costo de $400 pesos.
+        </p>
+      </div> 
+      <div class="casilla">
+        <img src="../../assets/pinerasaltando.png">
+      </div>
+    </div>
       <h3 class="texto"> Proporciona tu rut para confirmar</h3>
-
-      
-
-
-
       <div class="contenedor">
         <div class="casilla">
           <v-text-field label="Rut" class="labelnum" v-model="idUsuario"></v-text-field>
